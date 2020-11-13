@@ -21,10 +21,11 @@ function POMDPs.reward(mdp::VerticalCAS_MDP, s::stateType, ra::actType)
     if ra>COC
         if pra>COC
             reversal = mod(pra,2)!=mod(ra,2)
-        end
-        if !reversal
-            weakening = pra>ra
-            strengthening = pra<ra
+
+            if !reversal
+                weakening = pra>ra
+                strengthening = pra<ra
+            end
         end
         vLow, vHigh = mdp.velRanges[ra]
         corrective = (vown>vLow) .& (vown < vHigh)
